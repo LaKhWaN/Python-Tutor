@@ -71,10 +71,10 @@ const Hero = () => {
         {/* Animated Buttons */}
         <motion.div variants={childVariants}>
           <Flex gap={6}>
-            <CustomButton onClick={() => console.log("Register clicked")}>
+            <CustomButton onClick={() => window.location.href = "/register"}>
               Register
             </CustomButton>
-            <CustomButton onClick={() => console.log("Login clicked")}>
+            <CustomButton onClick={() => window.location.href = "/login"}>
               Login
             </CustomButton>
           </Flex>
