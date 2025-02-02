@@ -4,7 +4,7 @@ require("dotenv").config(); // To load API key from .env file
 const connectDB = require("./config/db");
 
 const app = express();
-const port = 5000 || process.env.PORT;
+const port = process.env.PORT || 5000;
 
 // Middleware to enable CORS
 app.use(cors());
