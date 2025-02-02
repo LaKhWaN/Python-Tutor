@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Routes,
+  Route,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -14,31 +19,35 @@ const App = () => {
   return (
     <QuizProvider>
       <Router>
-        <Navbar />
-        <Routes>
-          {/* Protected Routes */}
-          <Route
-            path="/topics"
-            element={<ProtectedRoute element={<Topics />} />}
-          />
-          <Route
-            path="/quizpage"
-            element={<ProtectedRoute element={<QuizPage />} />}
-          />
+        <div>
+          <Switch>
+            <Navbar />
+            <Routes>
+              {/* Protected Routes */}
+              <Route
+                path="/topics"
+                element={<ProtectedRoute element={<Topics />} />}
+              />
+              <Route
+                path="/quizpage"
+                element={<ProtectedRoute element={<QuizPage />} />}
+              />
 
-          {/* Auth Redirect Routes */}
-          <Route
-            path="/login"
-            element={<AuthRedirectRoute element={<Login />} />}
-          />
-          <Route
-            path="/register"
-            element={<AuthRedirectRoute element={<Register />} />}
-          />
+              {/* Auth Redirect Routes */}
+              <Route
+                path="/login"
+                element={<AuthRedirectRoute element={<Login />} />}
+              />
+              <Route
+                path="/register"
+                element={<AuthRedirectRoute element={<Register />} />}
+              />
 
-          {/* Default Route */}
-          <Route path="/" element={<Home />} />
-        </Routes>
+              {/* Default Route */}
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </Switch>
+        </div>
       </Router>
     </QuizProvider>
   );
