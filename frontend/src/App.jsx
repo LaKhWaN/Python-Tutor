@@ -19,35 +19,31 @@ const App = () => {
   return (
     <QuizProvider>
       <Router>
-        <div>
-          <Switch>
-            <Navbar />
-            <Routes>
-              {/* Protected Routes */}
-              <Route
-                path="/topics"
-                element={<ProtectedRoute element={<Topics />} />}
-              />
-              <Route
-                path="/quizpage"
-                element={<ProtectedRoute element={<QuizPage />} />}
-              />
+        <Navbar />
+        <Routes>
+          {/* Protected Routes */}
+          <Route
+            path="/topics"
+            element={<ProtectedRoute element={<Topics />} />}
+          />
+          <Route
+            path="/quizpage"
+            element={<ProtectedRoute element={<QuizPage />} />}
+          />
 
-              {/* Auth Redirect Routes */}
-              <Route
-                path="/login"
-                element={<AuthRedirectRoute element={<Login />} />}
-              />
-              <Route
-                path="/register"
-                element={<AuthRedirectRoute element={<Register />} />}
-              />
+          {/* Auth Redirect Routes */}
+          <Route
+            path="/login"
+            element={<AuthRedirectRoute element={<Login />} />}
+          />
+          <Route
+            path="/register"
+            element={<AuthRedirectRoute element={<Register />} />}
+          />
 
-              {/* Default Route */}
-              <Route path="/" element={<Home />} />
-            </Routes>
-          </Switch>
-        </div>
+          {/* Default Route */}
+          <Route path="/" element={<Home />} />
+        </Routes>
       </Router>
     </QuizProvider>
   );
