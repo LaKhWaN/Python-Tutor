@@ -1,7 +1,8 @@
 import axios from "axios";
 import { toast } from "react-toastify"; // Import react-toastify
 
-const API_URL = "http://localhost:5000/api/auth"; // Replace with the backend URL if needed
+const API_URL = "https://python-tutor-peh3.onrender.com/api/auth"; // Replace with the backend URL if needed
+// const API_URL = "http://localhost:5000/api/auth"; // Replace with the backend URL if needed
 
 // Register User
 export const register = async (userData) => {

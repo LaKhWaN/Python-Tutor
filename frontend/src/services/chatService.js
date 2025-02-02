@@ -12,7 +12,8 @@ export const sendMessageToAI = async (prompt, explanation) => {
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/gemini",
+      "https://python-tutor-peh3.onrender.com/api/gemini",
+      // "http://localhost:5000/api/gemini",
       { prompt, explanation },
       {
         headers: {
