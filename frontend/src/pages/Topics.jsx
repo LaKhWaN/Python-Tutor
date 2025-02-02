@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Heading, Text, Grid, Image } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 
 // Motion variants
 const containerVariants = {
@@ -32,43 +31,43 @@ const topics = [
     id: 1,
     title: "Hello World! 👋",
     description: "Learn how to print your first message in Python!",
-    image: "/assets/img/python.png",
-    link: "/quizpage?topic=hello-world", // Link updated based on quizzes object
+    image: "/assets/img/hello-world.png",
+    link: "/quizpage?topic=hello-world",
   },
   {
     id: 2,
     title: "Fun with Variables 🎲",
     description: "Discover how variables work in Python!",
-    image: "/assets/img/python.png",
-    link: "/quizpage?topic=fun-with-variables", // Link updated based on quizzes object
+    image: "/assets/img/fun-with-variables.png",
+    link: "/quizpage?topic=fun-with-variables",
   },
   {
     id: 3,
     title: "Let's Play with Lists 📋",
     description: "Learn how to use and manipulate lists in Python!",
-    image: "/assets/img/python.png",
-    link: "/quizpage?topic=lets-play-with-lists", // Link updated based on quizzes object
+    image: "/assets/img/lets-play-with-lists.png",
+    link: "/quizpage?topic=lets-play-with-lists",
   },
   {
     id: 4,
     title: "Making Decisions: If Statements 🧠",
     description: "Understand how to use if-else statements in Python!",
-    image: "/assets/img/python.png",
-    link: "/quizpage?topic=making-decisions", // Link updated based on quizzes object
+    image: "/assets/img/making-decisions.png",
+    link: "/quizpage?topic=making-decisions",
   },
   {
     id: 5,
     title: "Playing with Numbers 🔢",
     description: "Explore numbers and basic arithmetic operations in Python!",
-    image: "/assets/img/python.png",
-    link: "/quizpage?topic=playing-with-numbers", // Link updated based on quizzes object
+    image: "/assets/img/playing-with-numbers.png",
+    link: "/quizpage?topic=playing-with-numbers",
   },
   {
     id: 6,
     title: "Understanding Text: Strings 📜",
     description: "Learn how to work with text and strings in Python!",
-    image: "/assets/img/python.png",
-    link: "/quizpage?topic=understanding-text", // Link updated based on quizzes object
+    image: "/assets/img/understanding-texts.png",
+    link: "/quizpage?topic=understanding-text",
   },
 ];
 
@@ -95,10 +94,15 @@ const Topics = () => {
             fontSize="4xl"
             fontWeight="bold"
             color="black"
-            mb={6}
+            mb={4}
           >
             Explore Fun Python Topics! 🐍
           </Heading>
+          <Text fontSize="lg" color="gray.700" maxW="600px" mx="auto" mb={6}>
+            Get started with Python programming by exploring these fun and
+            interactive topics. Click on any topic to dive in and test your
+            knowledge! 🚀
+          </Text>
         </motion.div>
 
         {/* Grid of Topic Cards */}
@@ -113,7 +117,6 @@ const Topics = () => {
               variants={cardVariants}
               whileHover="hover"
             >
-              {/* Wrap each card in a Link */}
               <div onClick={handleTopicClick(topic.link)}>
                 <Box
                   bg="white"

@@ -6,12 +6,11 @@ import {
   Button,
   Text,
   VStack,
-  Flex,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FcGoogle } from "react-icons/fc";
 import { register } from "../services/authService"; // Import the authService
 import { toast, ToastContainer } from "react-toastify"; // Import ToastContainer
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -21,6 +20,8 @@ const Register = () => {
     password: "",
   });
 
+  const navigate = useNavigate(); // ✅ Correct placement of useNavigate()
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevState) => ({
@@ -29,21 +30,21 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const data = await register(userData);
-      console.log("Registration Success:", data);
-      // Redirect to /topics
-      const navigator = useNavigate();
-      navigator("/topics");
-    } catch (err) {
-      // Error toast is handled in authService
-    }
-  };
 
-  const handleGoogleSignup = () => {
-    console.log("Sign Up with Google clicked");
+    // Show a promise toast while registering
+    toast.promise(
+      register(userData), // Call register function (which returns a promise)
+      {
+        pending: "Signing up...", // Shown while waiting
+        success: "Registration successful! 🎉 Redirecting...", // If resolved
+        error: "Signup failed. Please try again.", // If rejected
+      }
+    ).then((data) => {
+      console.log("Registration Success:", data);
+      navigate("/topics"); // Redirect after successful signup
+    });
   };
 
   const cardVariants = {
@@ -51,14 +52,9 @@ const Register = () => {
     visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
     <>
-      <ToastContainer /> {/* Add ToastContainer */}
+      <ToastContainer autoClose={2000} /> {/* Toast messages disappear after 2s */}
       <Box
         minH="100vh"
         display="flex"
@@ -77,24 +73,12 @@ const Register = () => {
           borderRadius="lg"
           boxShadow="lg"
         >
-          <VStack
-            as={motion.div}
-            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-            spacing={6}
-          >
-            <Heading
-              as={motion.div}
-              variants={itemVariants}
-              fontSize="2xl"
-              fontWeight="bold"
-              color="gray.700"
-            >
+          <VStack spacing={6}>
+            <Heading fontSize="2xl" fontWeight="bold" color="gray.700">
               Sign Up 🚀
             </Heading>
 
             <Input
-              as={motion.input}
-              variants={itemVariants}
               name="email"
               type="email"
               placeholder="Email"
@@ -107,8 +91,6 @@ const Register = () => {
             />
 
             <Input
-              as={motion.input}
-              variants={itemVariants}
               name="username"
               type="text"
               placeholder="Username"
@@ -121,8 +103,6 @@ const Register = () => {
             />
 
             <Input
-              as={motion.input}
-              variants={itemVariants}
               name="password"
               type="password"
               placeholder="Password"
@@ -136,19 +116,14 @@ const Register = () => {
 
             <Button
               onClick={handleSubmit}
-              as={motion.button}
-              variants={itemVariants}
-              type="submit"
               colorScheme="purple"
               size="lg"
               w="100%"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
             >
               Sign Up
             </Button>
 
-            <Text as={motion.div} variants={itemVariants} color="gray.600">
+            <Text color="gray.600">
               Already have an account?{" "}
               <Text as="a" href="/login" color="purple.500" fontWeight="bold">
                 Login

@@ -9,6 +9,7 @@ import QuizPage from "./pages/QuizPage";
 import { QuizProvider } from "./pages/QuizContext";
 import ProtectedRoute from "./ProtectedRoute";
 import AuthRedirectRoute from "./AuthRedirectRoute"; // Import AuthRedirectRoute
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
           {/* Default Route */}
           <Route path="/" element={<Home />} />
         </Routes>
+        <Footer />
       </Router>
     </QuizProvider>
   );

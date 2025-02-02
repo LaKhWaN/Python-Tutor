@@ -1,18 +1,9 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Heading,
-  Input,
-  Button,
-  Text,
-  VStack,
-  Flex,
-} from "@chakra-ui/react";
+import { Box, Heading, Input, Button, Text, VStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FcGoogle } from "react-icons/fc";
 import { login } from "../services/authService"; // Import the authService
 import { toast, ToastContainer } from "react-toastify"; // Import ToastContainer
-import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -30,21 +21,22 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = await login(credentials);
-      console.log("Login Success:", data);
-      // We get the JWT and we can store it in localStorage
-      localStorage.setItem("token", data.token);
 
-      // Redirect to /topics
-      window.location.href = "/topics";
-    } catch (err) {
-      // Error toast is handled in authService
-    }
-  };
-
-  const handleGoogleLogin = () => {
-    console.log("Login with Google clicked");
+    // Show a promise toast while logging in
+    toast
+      .promise(
+        login(credentials), // Call login function (which returns a promise)
+        {
+          pending: "Logging in...", // Shown while waiting
+          success: "Login successful! 🚀 Redirecting...", // If resolved
+          error: "Login failed. Please check your credentials.", // If rejected
+        }
+      )
+      .then((data) => {
+        console.log("Login Success:", data);
+        localStorage.setItem("token", data.token);
+        window.location.href = "/topics"; // Redirect after successful login
+      });
   };
 
   const cardVariants = {
@@ -52,14 +44,10 @@ const Login = () => {
     visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
     <>
-      <ToastContainer /> {/* Add ToastContainer */}
+      <ToastContainer autoClose={2000} />{" "}
+      {/* Toast messages disappear after 2s */}
       <Box
         minH="100vh"
         display="flex"
@@ -78,24 +66,12 @@ const Login = () => {
           borderRadius="lg"
           boxShadow="lg"
         >
-          <VStack
-            as={motion.div}
-            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-            spacing={6}
-          >
-            <Heading
-              as={motion.div}
-              variants={itemVariants}
-              fontSize="2xl"
-              fontWeight="bold"
-              color="gray.700"
-            >
+          <VStack spacing={6}>
+            <Heading fontSize="2xl" fontWeight="bold" color="gray.700">
               Login 🔑
             </Heading>
 
             <Input
-              as={motion.input}
-              variants={itemVariants}
               name="username"
               type="text"
               placeholder="Username"
@@ -108,8 +84,6 @@ const Login = () => {
             />
 
             <Input
-              as={motion.input}
-              variants={itemVariants}
               name="password"
               type="password"
               placeholder="Password"
@@ -123,19 +97,14 @@ const Login = () => {
 
             <Button
               onClick={handleSubmit}
-              as={motion.button}
-              variants={itemVariants}
-              type="submit"
               colorScheme="purple"
               size="lg"
               w="100%"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
             >
               Login
             </Button>
 
-            <Text as={motion.div} variants={itemVariants} color="gray.600">
+            <Text color="gray.600">
               Don't have an account?{" "}
               <Text
                 as="a"

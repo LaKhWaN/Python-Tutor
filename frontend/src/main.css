@@ -1,0 +1,8 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+/* Apply Poppins font to everything */
+* {
+    font-family: "Exo 2", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}

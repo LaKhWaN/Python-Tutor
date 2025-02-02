@@ -1,5 +1,6 @@
 import React from "react";
 import { Flex, Link, Text, Button } from "@chakra-ui/react";
+import { ColorModeButton } from "./ui/color-mode";
 
 const Navbar = () => {
   // Check if the user is authenticated by checking for the JWT token in localStorage
