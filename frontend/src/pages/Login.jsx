@@ -66,6 +66,10 @@ const Login = () => {
           borderRadius="lg"
           boxShadow="lg"
         >
+          <Text fontSize="md" color="gray.500" mb={4}>
+            Please note that this platform uses free hosting and a free database
+            service. Registration and login may take a few moments.
+          </Text>{" "}
           <VStack spacing={6}>
             <Heading fontSize="2xl" fontWeight="bold" color="gray.700">
               Login 🔑

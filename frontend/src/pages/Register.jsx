@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Heading,
-  Input,
-  Button,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Heading, Input, Button, Text, VStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { register } from "../services/authService"; // Import the authService
 import { toast, ToastContainer } from "react-toastify"; // Import ToastContainer
@@ -34,17 +27,19 @@ const Register = () => {
     e.preventDefault();
 
     // Show a promise toast while registering
-    toast.promise(
-      register(userData), // Call register function (which returns a promise)
-      {
-        pending: "Signing up...", // Shown while waiting
-        success: "Registration successful! 🎉 Redirecting...", // If resolved
-        error: "Signup failed. Please try again.", // If rejected
-      }
-    ).then((data) => {
-      console.log("Registration Success:", data);
-      navigate("/topics"); // Redirect after successful signup
-    });
+    toast
+      .promise(
+        register(userData), // Call register function (which returns a promise)
+        {
+          pending: "Signing up...", // Shown while waiting
+          success: "Registration successful! 🎉 Redirecting...", // If resolved
+          error: "Signup failed. Please try again.", // If rejected
+        }
+      )
+      .then((data) => {
+        console.log("Registration Success:", data);
+        navigate("/topics"); // Redirect after successful signup
+      });
   };
 
   const cardVariants = {
@@ -54,7 +49,8 @@ const Register = () => {
 
   return (
     <>
-      <ToastContainer autoClose={2000} /> {/* Toast messages disappear after 2s */}
+      <ToastContainer autoClose={2000} />{" "}
+      {/* Toast messages disappear after 2s */}
       <Box
         minH="100vh"
         display="flex"
@@ -73,6 +69,10 @@ const Register = () => {
           borderRadius="lg"
           boxShadow="lg"
         >
+          <Text fontSize="md" color="gray.500" mb={4}>
+            Please note that this platform uses free hosting and a free database
+            service. Registration and login may take a few moments.
+          </Text>{" "}
           <VStack spacing={6}>
             <Heading fontSize="2xl" fontWeight="bold" color="gray.700">
               Sign Up 🚀
